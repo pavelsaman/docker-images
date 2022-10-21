@@ -1,0 +1,21 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y \
+  dnsutils \
+  ldnsutils \
+  net-tools \
+  iputils-ping \
+  iputils-tracepath \
+  iputils-arping \
+  iproute2 \
+  ethtool \
+  lsof \
+  mtr \
+  whois \
+  tcpdump \
+  ipcalc \
+  nmap \
+  curl \
+  wget \
+  ssh \
+  telnet
