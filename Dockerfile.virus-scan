@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y clamav
+RUN freshclam
+
+WORKDIR /data
+
+CMD ["clamscan", "--infected", "--recursive", "."]
