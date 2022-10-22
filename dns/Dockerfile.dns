@@ -1,0 +1,26 @@
+FROM ubuntu:latest
+LABEL maintainer="Pavel Saman"
+
+RUN apt-get update && apt-get install -y \
+  unbound \
+  ca-certificates \
+  ldnsutils && \
+  update-ca-certificates
+
+COPY unbound.conf.d/unbound.conf /etc/unbound/unbound.conf
+COPY unbound.conf.d/forward-zone.conf /etc/unbound/unbound.conf.d/forward-zone.conf
+COPY unbound.sh /
+RUN chmod 644 /etc/unbound/unbound.conf && \
+  groupadd _unbound && \
+  useradd \
+    --no-create-home \
+    --shell /bin/false \
+    --gid _unbound \
+    _unbound && \
+  chmod +x /unbound.sh
+
+EXPOSE 53/tcp
+EXPOSE 53/udp
+
+HEALTHCHECK --interval=5s --timeout=3s --start-period=5s CMD drill @127.0.0.1 cloudflare.com || exit 1
+CMD ["./unbound.sh"]
