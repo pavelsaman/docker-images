@@ -11,6 +11,7 @@ COPY unbound.conf.d/unbound.conf /etc/unbound/unbound.conf
 COPY unbound.conf.d/forward-zone.conf /etc/unbound/unbound.conf.d/forward-zone.conf
 COPY unbound.sh /
 RUN chmod 644 /etc/unbound/unbound.conf && \
+  chmod 644 /etc/unbound/unbound.conf.d/forward-zone.conf && \
   groupadd _unbound && \
   useradd \
     --no-create-home \
