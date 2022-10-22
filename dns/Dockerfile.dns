@@ -2,7 +2,7 @@ FROM ubuntu:latest
 LABEL maintainer="Pavel Saman"
 
 RUN apt-get update && apt-get install -y \
-  unbound \
+  unbound=1.13.1-1ubuntu5.1 \
   ca-certificates \
   ldnsutils && \
   update-ca-certificates
