@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
   ca-certificates \
   ldnsutils && \
   update-ca-certificates && \
+  apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 COPY unbound.conf.d/unbound.conf /etc/unbound/unbound.conf
