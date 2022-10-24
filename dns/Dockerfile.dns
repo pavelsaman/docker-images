@@ -1,11 +1,14 @@
 FROM ubuntu:latest
 LABEL maintainer="Pavel Saman"
 
+ENV UNBOUND_VERSION=1.13.1-1ubuntu5.1
+
 RUN apt-get update && apt-get install -y \
-  unbound=1.13.1-1ubuntu5.1 \
+  unbound=${UNBOUND_VERSION} \
   ca-certificates \
   ldnsutils && \
-  update-ca-certificates
+  update-ca-certificates && \
+  rm -rf /var/lib/apt/lists/*
 
 COPY unbound.conf.d/unbound.conf /etc/unbound/unbound.conf
 COPY unbound.conf.d/forward-zone.conf /etc/unbound/unbound.conf.d/forward-zone.conf
