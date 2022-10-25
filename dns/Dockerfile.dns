@@ -1,7 +1,8 @@
 FROM ubuntu:latest
 LABEL maintainer="Pavel Saman"
 
-ENV UNBOUND_VERSION=1.13.1-1ubuntu5.1
+ENV UNBOUND_VERSION=1.13.1-1ubuntu5.1 \
+  LOGGING=no
 
 RUN apt-get update && apt-get install -y \
   unbound=${UNBOUND_VERSION} \
@@ -13,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY unbound.conf.d/unbound.conf /etc/unbound/unbound.conf
 COPY unbound.conf.d/forward-zone.conf /etc/unbound/unbound.conf.d/forward-zone.conf
+COPY unbound.conf.d/logging.conf /etc/unbound/unbound.conf.d/logging.conf
 COPY unbound.sh /
 RUN chmod 644 /etc/unbound/unbound.conf && \
   chmod 644 /etc/unbound/unbound.conf.d/forward-zone.conf && \

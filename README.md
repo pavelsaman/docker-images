@@ -26,6 +26,16 @@ $ docker run \
   -p 127.0.0.1:53:53/tcp \
   --restart unless-stopped \
   dns
+# with logging on
+$ docker run \
+  -it \
+  -d \
+  --env LOGGING=yes \
+  --name dns \
+  -p 127.0.0.1:53:53/udp \
+  -p 127.0.0.1:53:53/tcp \
+  --restart unless-stopped \
+  dns
 # or on a higher port (e.g. when another dns sits on port 53)
 $ docker run \
   -it \
@@ -35,7 +45,7 @@ $ docker run \
   -p 127.0.0.1:5300:53/tcp \
   --restart unless-stopped \
   dns
-# with custom forward zones:
+# with custom forward zones
 $ docker run \
   -it \
   -d \
