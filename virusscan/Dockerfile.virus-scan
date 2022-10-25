@@ -5,8 +5,10 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN freshclam
-
 WORKDIR /data
 
-CMD ["clamscan", "--infected", "--recursive", "."]
+COPY virusscan.sh /
+
+RUN chmod +x /virusscan.sh
+
+CMD ["/virusscan.sh"]
