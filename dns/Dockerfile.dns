@@ -18,6 +18,7 @@ COPY unbound.conf.d/logging.conf /etc/unbound/unbound.conf.d/logging.conf
 COPY unbound.sh /
 RUN chmod 644 /etc/unbound/unbound.conf && \
   chmod 644 /etc/unbound/unbound.conf.d/forward-zone.conf && \
+  chmod 644 /etc/unbound/unbound.conf.d/logging.conf && \
   groupadd _unbound && \
   useradd \
     --no-create-home \
